@@ -4,7 +4,7 @@ Note Taking Angular Application
 
 ## Data flow & component diagram
 
-![Image of dataflow & component]('docs/images/SeaNote.png')
+![Image of dataflow & component](docs/images/SeaNote.png)
 
 ## Development server
 
