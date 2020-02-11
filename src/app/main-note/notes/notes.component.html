@@ -1,3 +1,5 @@
-<div *ngFor="let n of notesArray">
-<app-note-preview [note]="n"></app-note-preview>
+<div class="notes-container">
+	<div *ngFor="let n of notesArray">
+	<app-note-preview [note]="n"></app-note-preview>
+	</div>
 </div>
