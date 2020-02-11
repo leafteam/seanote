@@ -1,6 +1,10 @@
 # Seanote
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.1.
+Note Taking Angular Application
+
+## Data flow & component diagram
+
+![Image of dataflow & component]('./docs/images/SeaNote.png')
 
 ## Development server
 
