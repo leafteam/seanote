@@ -1,5 +1,5 @@
 import { Input, Component, OnInit } from '@angular/core';
-import { Note } from '../noter.service';
+import { Note } from '../../../noter.service';
 
 @Component({
   selector: 'app-note-preview',

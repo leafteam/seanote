@@ -8,6 +8,8 @@ import { AuthenticationComponent } from "./authentication/authentication.compone
 import { LoginComponent } from "./authentication/login/login.component";
 import { SignupComponent } from "./authentication/signup/signup.component";
 
+import { NoterService } from "./noter.service";
+
 import { ReactiveFormsModule } from "@angular/forms";
 
 import { MatCardModule } from "@angular/material/card";
@@ -19,6 +21,7 @@ import { MainNoteComponent } from './main-note/main-note.component';
 import { ActionsComponent } from './main-note/actions/actions.component';
 import { NotesComponent } from './main-note/notes/notes.component';
 import { NotePreviewComponent } from './main-note/notes/note-preview/note-preview.component';
+import { NoteviewComponent } from './noteview/noteview.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,8 @@ import { NotePreviewComponent } from './main-note/notes/note-preview/note-previe
     MainNoteComponent,
     ActionsComponent,
     NotesComponent,
-    NotePreviewComponent
+    NotePreviewComponent,
+    NoteviewComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +47,7 @@ import { NotePreviewComponent } from './main-note/notes/note-preview/note-previe
     MatFormFieldModule,
     MatButtonModule
   ],
-  providers: [],
+  providers: [NoterService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
