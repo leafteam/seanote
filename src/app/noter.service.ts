@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
 
 export class Note {
   public id: string;
@@ -19,66 +20,30 @@ export class Note {
 })
 export class NoterService {
   notesArray: Note[];
-  idProvider: number;
-  constructor() {
-    this.notesArray = [
-      new Note(
-        "1",
-        "Shoping",
-        "list of items",
-        "This is shopping item review main comspafjldsj sljda flds jf"
-      ),
-      new Note(
-        "2",
-        "Market",
-        "review of items",
-        "This is shopping item review main comspafjldsj sljda flds jf"
-      ),
-      new Note(
-        "3",
-        "Vegetables",
-        "vegeiis stuff",
-        "Show caseing changes kin gkt conteten ,This is shopping item review main comspafjldsj sljda flds jf"
-      )
-    ];
-    this.idProvider = 4;
+  serverIp: string;
+  constructor(private http: HttpClient) {
+    this.serverIp = "http://127.0.0.1:8072";
   }
 
   getNotes() {
-    return this.notesArray;
-  }
-
-  newNote() {
-    const note = new Note(this.idProvider.toString(), "test", "", "");
-    this.idProvider++;
-    this.notesArray.push(note);
-    return note.id;
+    return this.http.get(`${this.serverIp}/notes`);
   }
 
   saveNote(note: Note) {
-    const res = this.getNote(note.id);
-    if (res.res) {
-      const oldnote = res.data;
-      oldnote.title = note.title;
-      oldnote.subtitle = note.subtitle;
-      oldnote.content = note.content;
-    }
+    // const res = this.getNote(note.id);
+    // if (res.res) {
+    //   const oldnote = res.data;
+    //   oldnote.title = note.title;
+    //   oldnote.subtitle = note.subtitle;
+    //   oldnote.content = note.content;
+    // }
+    console.log("saving note------------");
+    console.log(note);
+    return this.http
+      .post<Note>(`${this.serverIp}/savenote`, note);
   }
 
   getNote(id: string) {
-    // console.log(`note id req ${id}`);
-    // console.log(this.notesArray);
-    for (let note of this.notesArray) {
-      if (note.id == id) {
-        return {
-          res: true,
-          data: note
-        };
-      }
-    }
-    return {
-      res: false,
-      data: new Note("0","not found", "",""),
-    };
+    return this.http.get(`${this.serverIp}/note/${id}`);
   }
 }

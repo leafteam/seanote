@@ -42,12 +42,18 @@ export class NoteviewComponent implements OnInit {
       subtitle: new FormControl(),
       content: new FormControl()
     });
-    const res = this.noter.getNote(this.id);
-    if (res.res) {
-      this.note = res.data;
-    }
-    this.editForm.controls.title.setValue(this.note.title);
-    this.editForm.controls.subtitle.setValue(this.note.subtitle);
-    this.editForm.controls.content.setValue(this.note.content);
+    this.noter.getNote(this.id).subscribe(data => {
+      console.log(data);
+      const foundNote = Array.from(Object.keys(data), k => data[k])[0];
+      this.note = new Note(
+        foundNote._id,
+        foundNote.title,
+        foundNote.subtitle,
+        foundNote.content
+      );
+      this.editForm.controls.title.setValue(this.note.title);
+      this.editForm.controls.subtitle.setValue(this.note.subtitle);
+      this.editForm.controls.content.setValue(this.note.content);
+    });
   }
 }
