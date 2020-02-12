@@ -22,7 +22,7 @@ export class NoteviewComponent implements OnInit {
 	}
 
   ngOnInit(): void {
-	  this.note = this.noter.getNote(this.id) || new Note("0"," "," ", " ");
+	  this.note = this.noter.getNote(this.id) || new Note("0","not - found "," ", " ");
   }
 
 }
