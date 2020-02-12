@@ -54,14 +54,30 @@ export class NoterService {
     return note.id;
   }
 
+  saveNote(note: Note) {
+    const res = this.noter.getNote(this.id);
+    if (res.res) {
+      oldnote = res.data || new Note(0, "not found", "", "");
+      oldnote.title = note.title;
+      oldnote.subtitle = note.subtitle;
+      oldnote.content = note.content;
+    }
+  }
+
   getNote(id: string) {
-    console.log(`note id req ${id}`);
-    console.log(this.notesArray);
+    // console.log(`note id req ${id}`);
+    // console.log(this.notesArray);
     for (let note of this.notesArray) {
       if (note.id == id) {
-        return note;
+        return {
+          res: true,
+          data: note
+        };
       }
     }
-    return false;
+    return {
+      res: false,
+      data: false
+    };
   }
 }
