@@ -13,7 +13,6 @@ export class NoteviewComponent implements OnInit {
   id: string;
   noter: NoterService;
   note: Note;
-  router: Router;
   editForm: FormGroup;
 
   constructor(
@@ -45,11 +44,8 @@ export class NoteviewComponent implements OnInit {
     });
     const res = this.noter.getNote(this.id);
     if (res.res) {
-      this.note = res.data || new Note(0, "not found", "", "");
-    } else {
-      this.note = new Note(0, "not found", "", "");
+      this.note = res.data;
     }
-
     this.editForm.controls.title.setValue(this.note.title);
     this.editForm.controls.subtitle.setValue(this.note.subtitle);
     this.editForm.controls.content.setValue(this.note.content);
