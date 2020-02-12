@@ -49,15 +49,16 @@ export class NoterService {
   }
 
   newNote() {
-    const note = new Note(this.idProvider++, "test", "", "");
+    const note = new Note(this.idProvider.toString(), "test", "", "");
+    this.idProvider++;
     this.notesArray.push(note);
     return note.id;
   }
 
   saveNote(note: Note) {
-    const res = this.noter.getNote(this.id);
+    const res = this.getNote(note.id);
     if (res.res) {
-      oldnote = res.data || new Note(0, "not found", "", "");
+      const oldnote = res.data;
       oldnote.title = note.title;
       oldnote.subtitle = note.subtitle;
       oldnote.content = note.content;
@@ -77,7 +78,7 @@ export class NoterService {
     }
     return {
       res: false,
-      data: false
+      data: new Note("0","not found", "",""),
     };
   }
 }
