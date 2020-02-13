@@ -32,7 +32,7 @@ export class NoteviewComponent implements OnInit {
     this.note.subtitle = this.editForm.value.subtitle;
     this.note.content = this.editForm.value.content;
 
-    this.noter.saveNote(this.note);
+    this.noter.saveNote(this.note).subscribe(data => console.log(data));
     this.router.navigate(["/main"]);
   }
 
@@ -42,12 +42,22 @@ export class NoteviewComponent implements OnInit {
       subtitle: new FormControl(),
       content: new FormControl()
     });
-    const res = this.noter.getNote(this.id);
-    if (res.res) {
-      this.note = res.data;
+    if (this.id != "-1") {
+      this.noter.getNote(this.id).subscribe(data => {
+        console.log(data);
+        const foundNote = Array.from(Object.keys(data), k => data[k])[0];
+        this.note = new Note(
+          foundNote._id,
+          foundNote.title,
+          foundNote.subtitle,
+          foundNote.content
+        );
+        this.editForm.controls.title.setValue(this.note.title);
+        this.editForm.controls.subtitle.setValue(this.note.subtitle);
+        this.editForm.controls.content.setValue(this.note.content);
+      });
+    } else {
+      this.note = new Note("", "", "", "");
     }
-    this.editForm.controls.title.setValue(this.note.title);
-    this.editForm.controls.subtitle.setValue(this.note.subtitle);
-    this.editForm.controls.content.setValue(this.note.content);
   }
 }

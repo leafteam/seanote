@@ -18,7 +18,6 @@ export class ActionsComponent implements OnInit {
   ngOnInit(): void {}
 
   newNote() {
-    const id = this.noter.newNote();
-    this.router.navigate(["/editnote/" + id]);
+    this.router.navigate(["/editnote/-1"]);
   }
 }
