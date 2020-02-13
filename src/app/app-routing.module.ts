@@ -5,7 +5,7 @@ import { MainNoteComponent } from "./main-note/main-note.component";
 import { NoteviewComponent } from "./noteview/noteview.component";
 
 const routes: Routes = [
-  { path: "", component: MainNoteComponent },
+  { path: "", component: AuthenticationComponent },
   { path: "main", component: MainNoteComponent },
   { path: "editnote/:id", component: NoteviewComponent }
 ]
