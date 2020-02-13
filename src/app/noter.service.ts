@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 
 export class Note {
   public id: string;
@@ -26,7 +26,7 @@ export class NoterService {
   }
 
   getNotes() {
-    return this.http.get(`${this.serverIp}/notes`);
+    return this.http.get<any>(`${this.serverIp}/notes`);
   }
 
   saveNote(note: Note) {
@@ -37,10 +37,21 @@ export class NoterService {
     //   oldnote.subtitle = note.subtitle;
     //   oldnote.content = note.content;
     // }
-    console.log("saving note------------");
-    console.log(note);
-    return this.http
-      .post<Note>(`${this.serverIp}/savenote`, note);
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "my-auth-token"
+      })
+    };
+
+    console.log("saving ------------");
+    // console.log(note);
+    // return this.http
+    //   .post<any>(`${this.serverIp}/savenote`, note);
+
+    /** POST: add a new hero to the database */
+    return this.http.post<Note>(`${this.serverIp}/savenote`, note, httpOptions);
   }
 
   getNote(id: string) {
