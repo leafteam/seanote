@@ -21,8 +21,14 @@ export class Note {
 export class NoterService {
   notesArray: Note[];
   serverIp: string;
+  httpOptions;
   constructor(private http: HttpClient) {
     this.serverIp = "http://127.0.0.1:8072";
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json"
+      })
+    };
   }
 
   getNotes() {
@@ -38,23 +44,24 @@ export class NoterService {
     //   oldnote.content = note.content;
     // }
 
-    const httpOptions = {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        Authorization: "my-auth-token"
-      })
-    };
-
     console.log("saving ------------");
     // console.log(note);
     // return this.http
     //   .post<any>(`${this.serverIp}/savenote`, note);
 
     /** POST: add a new hero to the database */
-    return this.http.post<Note>(`${this.serverIp}/savenote`, note, httpOptions);
+    return this.http.post<Note>(
+      `${this.serverIp}/savenote`,
+      note,
+      this.httpOptions
+    );
   }
 
   getNote(id: string) {
     return this.http.get(`${this.serverIp}/note/${id}`);
+  }
+
+  deleteNote(note: Note) {
+    return this.http.delete(`${this.serverIp}/deletenote/${note.id}`, this.httpOptions);
   }
 }

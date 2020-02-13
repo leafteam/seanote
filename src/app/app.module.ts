@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AuthenticationComponent } from "./authentication/authentication.component";
 import { LoginComponent } from "./authentication/login/login.component";
 import { SignupComponent } from "./authentication/signup/signup.component";
+import { MatGridListModule } from "@angular/material/grid-list";
 
 import { NoterService } from "./noter.service";
 
@@ -43,6 +44,7 @@ import { NoteviewComponent } from "./noteview/noteview.component";
     HttpClientModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    MatGridListModule,
     MatCardModule,
     MatTabsModule,
     MatFormFieldModule,
